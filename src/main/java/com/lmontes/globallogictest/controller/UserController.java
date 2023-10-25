@@ -2,6 +2,7 @@ package com.lmontes.globallogictest.controller;
 
 import com.lmontes.globallogictest.model.Person;
 import com.lmontes.globallogictest.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Person> signup(@RequestBody Person user) {
+    public ResponseEntity<Person> signup(@Valid @RequestBody Person user) {
         Person userSave = userService.signup(user).get();
         return ResponseEntity.ok(userSave);
     }
