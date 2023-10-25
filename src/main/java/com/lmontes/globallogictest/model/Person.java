@@ -1,6 +1,7 @@
 package com.lmontes.globallogictest.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Email
     private String email;
     private String password;
 
