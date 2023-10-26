@@ -1,5 +1,7 @@
 package com.lmontes.globallogictest.controller;
 
+import com.lmontes.globallogictest.dto.LoginRequest;
+import com.lmontes.globallogictest.dto.LoginResponse;
 import com.lmontes.globallogictest.dto.UserRequest;
 import com.lmontes.globallogictest.model.Person;
 import com.lmontes.globallogictest.service.UserService;
@@ -20,5 +22,10 @@ public class UserController {
     public ResponseEntity<Person> signup(@Valid @RequestBody UserRequest user) {
         Person userSave = userService.signup(user).get();
         return ResponseEntity.ok(userSave);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest login) {
+        return ResponseEntity.ok(userService.login(login));
     }
 }
