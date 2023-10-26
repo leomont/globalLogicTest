@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class UserService {
     public LoginResponse login(LoginRequest login) {
         Person user = userRepository.findByEmail(login.getEmail());
 
-        if( !PasswordUtils.checkPassword(login.getPassword(), user.getPassword()) ) {
+        if(Objects.isNull(user) || !PasswordUtils.checkPassword(login.getPassword(), user.getPassword()) ) {
             throw new LoginException("Los datos no son correctos");
         }
 
