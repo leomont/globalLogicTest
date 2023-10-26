@@ -3,12 +3,14 @@ package com.lmontes.globallogictest.utils;
 import com.lmontes.globallogictest.model.Person;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
+@Data
 public class JsonTokenUtils {
 
     @Value("${jwt.secret}")
