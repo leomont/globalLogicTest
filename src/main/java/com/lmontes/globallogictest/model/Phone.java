@@ -15,6 +15,6 @@ public class Phone {
     private Long id;
     private String number;
     private Integer cityCode;
-    private String contryCode;
+    private String countryCode;
 
 }
