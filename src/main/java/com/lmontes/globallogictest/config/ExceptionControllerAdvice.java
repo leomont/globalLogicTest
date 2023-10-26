@@ -1,6 +1,7 @@
 package com.lmontes.globallogictest.config;
 
 import com.lmontes.globallogictest.dto.ErrorResponse;
+import com.lmontes.globallogictest.exception.LoginException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,15 @@ public class ExceptionControllerAdvice {
         ErrorResponse errorResponse = new ErrorResponse(new Timestamp(System.currentTimeMillis()),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Se produjo una excepción de violación de integridad");
+        return ResponseEntity.status(errorResponse.getCodigo()).body(errorResponse);
+    }
+
+    @ExceptionHandler(LoginException.class)
+    public ResponseEntity<ErrorResponse> handleUniqueException(LoginException ex) {
+        log.info(ex.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(new Timestamp(System.currentTimeMillis()),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                ex.getMessage());
         return ResponseEntity.status(errorResponse.getCodigo()).body(errorResponse);
     }
 }
