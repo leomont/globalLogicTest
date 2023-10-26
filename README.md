@@ -56,6 +56,12 @@ La solicitud debe incluir un cuerpo JSON con los datos de inicio de sesión, por
 }
 ```
 
+### Documentacion Swagger
+
+Puedes acceder al siguiente enlace para conocer la documentacion de los microservicios
+
+`http://localhost:8080/doc/swagger-ui/index.html`
+
 ## Configuración del Proyecto
 Asegúrate de tener Java y Gradle instalados en tu sistema antes de ejecutar el proyecto.
 
