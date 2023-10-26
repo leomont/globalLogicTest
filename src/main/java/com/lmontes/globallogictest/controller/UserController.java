@@ -1,5 +1,6 @@
 package com.lmontes.globallogictest.controller;
 
+import com.lmontes.globallogictest.dto.UserRequest;
 import com.lmontes.globallogictest.model.Person;
 import com.lmontes.globallogictest.service.UserService;
 import jakarta.validation.Valid;
@@ -16,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Person> signup(@Valid @RequestBody Person user) {
+    public ResponseEntity<Person> signup(@Valid @RequestBody UserRequest user) {
         Person userSave = userService.signup(user).get();
         return ResponseEntity.ok(userSave);
     }
