@@ -2,8 +2,13 @@ package com.lmontes.globallogictest.config;
 
 import com.lmontes.globallogictest.dto.ErrorResponse;
 import com.lmontes.globallogictest.exception.LoginException;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
+//import jakarta.validation.ConstraintViolation;
+//import jakarta.validation.ConstraintViolationException;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.constraints.*;
+import javax.persistence.*;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+
 
 @Slf4j
 @ControllerAdvice
@@ -28,14 +35,16 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
         log.info(ex.getBindingResult().getFieldError().getDefaultMessage());
-        ErrorResponse errorResponse = new ErrorResponse(new Timestamp(System.currentTimeMillis()), ex.getStatusCode().value(), ex.getBindingResult().getFieldError().getDefaultMessage());
-        return ResponseEntity.status(ex.getStatusCode().value()).body(errorResponse);
+        //ErrorResponse errorResponse = new ErrorResponse(new Timestamp(System.currentTimeMillis()), ex.getStatusCode().value(), ex.getBindingResult().getFieldError().getDefaultMessage());
+        //return ResponseEntity.status(ex.getStatusCode().value()).body(errorResponse);
+        return null;
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErrorResponse> handleValidationException(ConstraintViolationException ex) {
-        List messages = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage).toList();
-        log.info(messages.toString());
+        //List messages = ex.getConstraintViolations().stream().map(ConstraintViolation::getMessage).toList();
+        List messages = null;
+                log.info(messages.toString());
         ErrorResponse errorResponse = new ErrorResponse(new Timestamp(System.currentTimeMillis()),
                 HttpStatus.BAD_REQUEST.value(),
                 messages.toString());

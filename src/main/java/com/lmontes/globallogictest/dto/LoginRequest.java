@@ -1,7 +1,11 @@
 package com.lmontes.globallogictest.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import javax.validation.constraints.*;
+import javax.persistence.*;
+import lombok.*;
+
+//import jakarta.validation.constraints.NotBlank;
+//import lombok.Data;
 
 @Data
 public class LoginRequest {
