@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -20,6 +22,7 @@ public class Person {
     private UUID id;
     private String name;
     @Column( unique = true )
+
     private String email;
     private String password;
 
@@ -29,4 +32,11 @@ public class Person {
     private LocalDateTime created;
     private LocalDateTime lastLogin;
     private boolean isActive = true;
+
+    @PrePersist
+    public void generateUUID() {
+        if (id == null) {
+            id = UUID.randomUUID();
+        }
+    }
 }
