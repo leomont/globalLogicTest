@@ -6,35 +6,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import static org.junit.jupiter.api.Assertions.*;
+
+
 
 @DataJpaTest
 public class UserRepositoryTest {
 
     @Autowired
-    private TestEntityManager entityManager;
+    public TestEntityManager entityManager;
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
     public void testFindByEmail() {
-        // Crear un usuario de prueba y guardarlo en la base de datos
-        Person user = new Person();
-        user.setEmail("testuser@example.com");
-        entityManager.persist(user);
+        // Crea un objeto Person para insertarlo en la base de datos
+        Person person = new Person();
+        person.setEmail("test@example.com");
+        // Otras configuraciones para el objeto Person si es necesario
 
-        // Buscar el usuario por su dirección de correo electrónico
-        Person foundUser = userRepository.findByEmail("testuser@example.com");
+        // Inserta el objeto en la base de datos utilizando el TestEntityManager
+        entityManager.persist(person);
+        //userRepository.save(person);
 
-        assertNotNull(foundUser);
-        assertEquals("testuser@example.com", foundUser.getEmail());
+        // Llama al método findByEmail para buscar el usuario por su dirección de correo
+        Person foundPerson = userRepository.findByEmail("test@example.com");
+
+        // Verifica que se haya encontrado el usuario
+        assertNotNull(foundPerson);
+        assertEquals("test@example.com", foundPerson.getEmail());
+        // Realiza más verificaciones según sea necesario
     }
 
     @Test
-    public void testFindByEmailWhenNotExists() {
-        // Buscar un usuario que no existe en la base de datos
-        Person notFoundUser = userRepository.findByEmail("nonexistent@example.com");
+    public void testFindByNonExistentEmail() {
+        // Llama al método findByEmail para buscar un correo que no existe
+        Person foundPerson = userRepository.findByEmail("nonexistent@example.com");
 
-        assertNull(notFoundUser);
+        // Verifica que el resultado sea nulo (es decir, que no se encontró ningún usuario)
+        assertNull(foundPerson);
     }
+
 }

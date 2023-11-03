@@ -37,7 +37,7 @@ public class JsonTokenUtilsTest {
         // Decodificar el token y verificar su contenido
         Jws<Claims> claims = Jwts.parser().setSigningKey("mi_secreto").parseClaimsJws(token);
 
-        assertEquals(1L, claims.getBody().get("userId"));
+        assertEquals(user.getId().toString() , claims.getBody().get("userId"));
         assertEquals("usuario@ejemplo.com", claims.getBody().get("email"));
 
         // Verificar que el token no ha expirado
